@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>98th Academy Awards — My Oscar Ballot 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-deep: #0a0a0f;
+  --bg-card: #151520;
+  --gold: #d4af37;
+  --gold-bright: #f0d060;
+  --gold-dim: rgba(212,175,55,0.2);
+  --text: #f5f0e8;
+  --text-muted: #a09880;
+  --silver: #9ca3af;
+  --copper: #c97d60;
+  --inactive: #2a2a3a;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* HEADER */
+.app-header {
+  text-align: center;
+  padding: 40px 20px 30px;
+  background: linear-gradient(180deg, #12121f 0%, var(--bg-deep) 100%);
+  border-bottom: 1px solid var(--gold-dim);
+  position: relative;
+}
+.app-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.app-header .subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+.progress {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.progress strong { color: var(--gold); }
+
+/* LEGEND BAR */
+.legend-bar {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 14px 20px;
+  background: rgba(21,21,32,0.8);
+  border-bottom: 1px solid var(--gold-dim);
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.legend-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+.legend-icon.want { background: rgba(212,175,55,0.15); color: var(--gold); border: 1px solid rgba(212,175,55,0.4); }
+.legend-icon.ok { background: rgba(156,163,175,0.1); color: var(--silver); border: 1px solid rgba(156,163,175,0.3); }
+.legend-icon.predict { background: rgba(201,125,96,0.15); color: var(--copper); border: 1px solid rgba(201,125,96,0.4); }
+
+/* MAIN */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 16px 120px;
+}
+
+/* CATEGORY CARD */
+.category-card {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-dim);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.category-card:hover {
+  border-color: rgba(212,175,55,0.35);
+}
+.category-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+  gap: 12px;
+  transition: background 0.2s;
+}
+.category-header:hover {
+  background: rgba(212,175,55,0.04);
+}
+.category-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  flex: 1;
+  letter-spacing: 0.5px;
+}
+.vote-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(212,175,55,0.12);
+  color: var(--gold);
+  white-space: nowrap;
+}
+.vote-badge.empty {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+.chevron {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  transition: transform 0.3s;
+}
+.category-card.collapsed .chevron {
+  transform: rotate(-90deg);
+}
+.category-body {
+  padding: 0 20px 16px;
+  transition: max-height 0.3s ease;
+}
+.category-card.collapsed .category-body {
+  display: none;
+}
+
+/* NOMINEE ROW */
+.nominee-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  gap: 12px;
+}
+.nominee-row:last-child { border-bottom: none; }
+.nominee-info {
+  flex: 1;
+  min-width: 0;
+}
+.nominee-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  display: block;
+}
+.nominee-detail {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vote-buttons {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.vote-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid var(--inactive);
+  background: transparent;
+  color: #555;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.vote-btn:hover {
+  border-color: #555;
+  background: rgba(255,255,255,0.03);
+}
+.vote-btn.active-want {
+  background: rgba(212,175,55,0.15);
+  border-color: rgba(212,175,55,0.5);
+  color: var(--gold);
+  box-shadow: 0 0 12px rgba(212,175,55,0.15);
+}
+.vote-btn.active-ok {
+  background: rgba(156,163,175,0.1);
+  border-color: rgba(156,163,175,0.4);
+  color: var(--silver);
+}
+.vote-btn.active-predict {
+  background: rgba(201,125,96,0.15);
+  border-color: rgba(201,125,96,0.5);
+  color: var(--copper);
+  box-shadow: 0 0 12px rgba(201,125,96,0.1);
+}
+
+/* EXPORT BAR */
+.export-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 20px;
+  background: linear-gradient(180deg, transparent, var(--bg-deep) 30%);
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  z-index: 100;
+}
+.export-btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 14px 36px;
+  border-radius: 50px;
+  border: 1px solid var(--gold);
+  background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.05));
+  color: var(--gold);
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+}
+.export-btn:hover {
+  background: linear-gradient(135deg, rgba(212,175,55,0.35), rgba(212,175,55,0.15));
+  box-shadow: 0 0 30px rgba(212,175,55,0.15);
+}
+.export-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.reset-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.reset-btn:hover {
+  border-color: rgba(255,255,255,0.25);
+  color: var(--text);
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: var(--bg-card);
+  border: 1px solid var(--gold-dim);
+  color: var(--text);
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  z-index: 200;
+  transition: transform 0.4s ease;
+  pointer-events: none;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* LOADING OVERLAY */
+.loading-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,15,0.85);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+}
+.loading-overlay.show { display: flex; }
+.loading-overlay .spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--gold-dim);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-overlay p {
+  color: var(--gold);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .app-header h1 { font-size: 1.4rem; letter-spacing: 1px; }
+  .nominee-row { flex-wrap: wrap; }
+  .vote-buttons { width: 100%; justify-content: flex-end; margin-top: 4px; }
+  .legend-bar { gap: 12px; }
+  .export-btn { font-size: 0.85rem; padding: 12px 28px; }
+}
+
+/* ===== EXPORT STYLES ===== */
+.export-container {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 1080px;
+  font-family: 'Inter', sans-serif;
+}
+.export-wrapper {
+  width: 1080px;
+  background: linear-gradient(180deg, #0f0f1e 0%, #0a0a12 40%, #0c0c18 100%);
+  padding: 60px 50px;
+  position: relative;
+}
+.export-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.export-hdr {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.export-hdr .stars {
+  font-size: 18px;
+  color: var(--gold);
+  letter-spacing: 8px;
+  margin-bottom: 8px;
+}
+.export-hdr h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  color: var(--gold);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.export-hdr .sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.export-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.5) 30%, var(--gold) 50%, rgba(212,175,55,0.5) 70%, transparent 100%);
+  margin: 24px auto;
+  max-width: 400px;
+}
+.export-divider-dot {
+  text-align: center;
+  color: var(--gold);
+  font-size: 12px;
+  margin: -7px 0 0;
+  position: relative;
+  z-index: 1;
+}
+.export-divider-dot span {
+  background: #0c0c18;
+  padding: 0 12px;
+}
+.export-hdr-mini {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+}
+.export-hdr-mini-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.export-hdr-mini-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.export-hdr-mini-sep {
+  color: var(--gold);
+  font-size: 10px;
+  opacity: 0.6;
+}
+.export-hdr-mini-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.export-hdr-mini-page {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--gold);
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
+.export-legend {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin: 0 0 28px;
+}
+.export-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.export-legend-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+.export-legend-icon.want { background: rgba(212,175,55,0.2); color: var(--gold); border: 1px solid rgba(212,175,55,0.4); }
+.export-legend-icon.ok { background: rgba(156,163,175,0.12); color: var(--silver); border: 1px solid rgba(156,163,175,0.3); }
+.export-legend-icon.predict { background: rgba(201,125,96,0.2); color: var(--copper); border: 1px solid rgba(201,125,96,0.4); }
+
+.export-section {
+  margin-bottom: 28px;
+}
+.export-section-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+  padding-left: 4px;
+  opacity: 0.7;
+}
+.export-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.export-cat {
+  background: linear-gradient(145deg, rgba(22,22,38,0.95) 0%, rgba(16,16,28,0.98) 100%);
+  border: 1px solid rgba(212,175,55,0.22);
+  border-radius: 12px;
+  padding: 20px 22px 18px;
+}
+.export-cat.wide {
+  grid-column: 1 / -1;
+}
+.export-cat-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.export-cat-line {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(212,175,55,0.4), transparent);
+  margin-bottom: 12px;
+}
+.export-vote-group {
+  margin-bottom: 10px;
+}
+.export-vote-group:last-child { margin-bottom: 0; }
+.export-vote-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+  opacity: 0.7;
+}
+.export-vote-label-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+.export-nom {
+  display: flex;
+  align-items: baseline;
+  padding: 4px 0 4px 28px;
+  gap: 8px;
+}
+.export-nom-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+  min-width: 0;
+}
+.export-nom-detail {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+  flex-shrink: 0;
+  max-width: 45%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.export-nom.highlight .export-nom-name {
+  font-size: 15px;
+  color: var(--gold-bright);
+}
+.export-footer {
+  text-align: center;
+  margin-top: 36px;
+  padding-top: 8px;
+}
+.export-footer p {
+  font-size: 12px;
+  color: rgba(160,152,128,0.5);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <h1>98th Academy Awards</h1>
+  <div class="subtitle">My Oscar Ballot &mdash; March 2026</div>
+  <div class="progress">Voted in <strong id="progress-count">0</strong> of <strong>24</strong> categories</div>
+</header>
+
+<div class="legend-bar">
+  <div class="legend-item"><span class="legend-icon want">&#10084;&#65039;</span> Want to Win</div>
+  <div class="legend-item"><span class="legend-icon ok">&#128077;</span> Don't Mind</div>
+  <div class="legend-item"><span class="legend-icon predict">&#127942;</span> Think Will Win</div>
+</div>
+
+<main id="voting-area"></main>
+
+<div class="export-bar">
+  <button class="reset-btn" onclick="resetBallot()">Reset</button>
+  <button class="export-btn" onclick="exportBallot()">Export as PNGs</button>
+</div>
+
+<div id="export-container" class="export-container"></div>
+
+<div class="toast" id="toast"></div>
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <p>Generating your ballot...</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@1.5.0/dist/html2canvas-pro.min.js"></script>
+<script>
+// ===== DATA =====
+const CATEGORIES = [
+  {
+    id: "picture", name: "Best Picture",
+    nominees: [
+      { name: "Sinners", detail: "Ryan Coogler, Producer" },
+      { name: "One Battle after Another", detail: "Paul Thomas Anderson, Producer" },
+      { name: "Hamnet", detail: "Sam Mendes, Producer" },
+      { name: "Marty Supreme", detail: "Josh Safdie, Producer" },
+      { name: "The Secret Agent", detail: "Emilie Lesclaux, Producer" },
+      { name: "Sentimental Value", detail: "Maria Ekerhovd, Producer" },
+      { name: "Bugonia", detail: "Yorgos Lanthimos, Producer" },
+      { name: "F1", detail: "Brad Pitt, Producer" },
+      { name: "Frankenstein", detail: "Guillermo del Toro, Producer" },
+      { name: "Train Dreams", detail: "Greg Kwedar, Producer" }
+    ]
+  },
+  {
+    id: "directing", name: "Directing", swapForExport: true,
+    nominees: [
+      { name: "Ryan Coogler", detail: "Sinners" },
+      { name: "Paul Thomas Anderson", detail: "One Battle after Another" },
+      { name: "Chlo\u00e9 Zhao", detail: "Hamnet" },
+      { name: "Josh Safdie", detail: "Marty Supreme" },
+      { name: "Joachim Trier", detail: "Sentimental Value" }
+    ]
+  },
+  {
+    id: "lead-actor", name: "Actor in a Leading Role",
+    nominees: [
+      { name: "Michael B. Jordan", detail: "Sinners" },
+      { name: "Leonardo DiCaprio", detail: "One Battle after Another" },
+      { name: "Timoth\u00e9e Chalamet", detail: "Marty Supreme" },
+      { name: "Ethan Hawke", detail: "Blue Moon" },
+      { name: "Wagner Moura", detail: "The Secret Agent" }
+    ]
+  },
+  {
+    id: "lead-actress", name: "Actress in a Leading Role",
+    nominees: [
+      { name: "Jessie Buckley", detail: "Hamnet" },
+      { name: "Rose Byrne", detail: "If I Had Legs I'd Kick You" },
+      { name: "Kate Hudson", detail: "Song Sung Blue" },
+      { name: "Renate Reinsve", detail: "Sentimental Value" },
+      { name: "Emma Stone", detail: "Bugonia" }
+    ]
+  },
+  {
+    id: "supporting-actor", name: "Actor in a Supporting Role",
+    nominees: [
+      { name: "Benicio Del Toro", detail: "One Battle after Another" },
+      { name: "Jacob Elordi", detail: "Frankenstein" },
+      { name: "Delroy Lindo", detail: "Sinners" },
+      { name: "Sean Penn", detail: "One Battle after Another" },
+      { name: "Stellan Skarsg\u00e5rd", detail: "Sentimental Value" }
+    ]
+  },
+  {
+    id: "supporting-actress", name: "Actress in a Supporting Role",
+    nominees: [
+      { name: "Elle Fanning", detail: "Sentimental Value" },
+      { name: "Inga Ibsdotter Lilleaas", detail: "Sentimental Value" },
+      { name: "Amy Madigan", detail: "Weapons" },
+      { name: "Wunmi Mosaku", detail: "Sinners" },
+      { name: "Teyana Taylor", detail: "One Battle after Another" }
+    ]
+  },
+  {
+    id: "original-screenplay", name: "Writing (Original Screenplay)", swapForExport: true,
+    nominees: [
+      { name: "Ryan Coogler", detail: "Sinners" },
+      { name: "Ronald Bronstein & Josh Safdie", detail: "Marty Supreme" },
+      { name: "Eskil Vogt, Joachim Trier", detail: "Sentimental Value" },
+      { name: "Robert Kaplow", detail: "Blue Moon" },
+      { name: "Jafar Panahi", detail: "It Was Just an Accident" }
+    ]
+  },
+  {
+    id: "adapted-screenplay", name: "Writing (Adapted Screenplay)", swapForExport: true,
+    nominees: [
+      { name: "Paul Thomas Anderson", detail: "One Battle after Another" },
+      { name: "Chlo\u00e9 Zhao & Maggie O'Farrell", detail: "Hamnet" },
+      { name: "Guillermo del Toro", detail: "Frankenstein" },
+      { name: "Will Tracy", detail: "Bugonia" },
+      { name: "Clint Bentley & Greg Kwedar", detail: "Train Dreams" }
+    ]
+  },
+  {
+    id: "animated-feature", name: "Animated Feature Film",
+    nominees: [
+      { name: "Arco", detail: "Ugo Bienvenu, F\u00e9lix de Givry" },
+      { name: "Elio", detail: "Madeline Sharafian, Domee Shi" },
+      { name: "KPop Demon Hunters", detail: "Maggie Kang, Chris Appelhans" },
+      { name: "Little Am\u00e9lie or the Character of Rain", detail: "Ma\u00eflys Vallade" },
+      { name: "Zootopia 2", detail: "Jared Bush, Byron Howard" }
+    ]
+  },
+  {
+    id: "international-feature", name: "International Feature Film",
+    nominees: [
+      { name: "The Secret Agent", detail: "Brazil" },
+      { name: "It Was Just an Accident", detail: "France" },
+      { name: "Sentimental Value", detail: "Norway" },
+      { name: "Sir\u0101t", detail: "Spain" },
+      { name: "The Voice of Hind Rajab", detail: "Tunisia" }
+    ]
+  },
+  {
+    id: "documentary-feature", name: "Documentary Feature Film",
+    nominees: [
+      { name: "The Perfect Neighbor", detail: "Geeta Gandbhir" },
+      { name: "The Alabama Solution", detail: "Andrew Jarecki" },
+      { name: "Come See Me in the Good Light", detail: "Ryan White" },
+      { name: "Cutting through Rocks", detail: "Sara Khaki" },
+      { name: "Mr. Nobody against Putin", detail: "David Borenstein" }
+    ]
+  },
+  {
+    id: "cinematography", name: "Cinematography", swapForExport: true,
+    nominees: [
+      { name: "Autumn Durald Arkapaw", detail: "Sinners" },
+      { name: "Michael Bauman", detail: "One Battle after Another" },
+      { name: "Darius Khondji", detail: "Marty Supreme" },
+      { name: "Dan Laustsen", detail: "Frankenstein" },
+      { name: "Adolpho Veloso", detail: "Train Dreams" }
+    ]
+  },
+  {
+    id: "film-editing", name: "Film Editing", swapForExport: true,
+    nominees: [
+      { name: "Michael P. Shawver", detail: "Sinners" },
+      { name: "Andy Jurgensen", detail: "One Battle after Another" },
+      { name: "Ronald Bronstein & Josh Safdie", detail: "Marty Supreme" },
+      { name: "Olivier Bugge Coutt\u00e9", detail: "Sentimental Value" },
+      { name: "Stephen Mirrione", detail: "F1" }
+    ]
+  },
+  {
+    id: "production-design", name: "Production Design", swapForExport: true,
+    nominees: [
+      { name: "Hannah Beachler", detail: "Sinners" },
+      { name: "Florencia Martin", detail: "One Battle after Another" },
+      { name: "Jack Fisk", detail: "Marty Supreme" },
+      { name: "Fiona Crombie", detail: "Hamnet" },
+      { name: "Tamara Deverell", detail: "Frankenstein" }
+    ]
+  },
+  {
+    id: "costume-design", name: "Costume Design", swapForExport: true,
+    nominees: [
+      { name: "Ruth E. Carter", detail: "Sinners" },
+      { name: "Miyako Bellizzi", detail: "Marty Supreme" },
+      { name: "Malgosia Turzanska", detail: "Hamnet" },
+      { name: "Kate Hawley", detail: "Frankenstein" },
+      { name: "Deborah L. Scott", detail: "Avatar: Fire and Ash" }
+    ]
+  },
+  {
+    id: "makeup-hairstyling", name: "Makeup and Hairstyling",
+    nominees: [
+      { name: "Sinners", detail: "Ken Diaz, Mike Fontaine, Shunika Terry" },
+      { name: "Frankenstein", detail: "Mike Hill, Jordan Samuel, Cliona Furey" },
+      { name: "Kokuho", detail: "Kyoko Toyokawa, Naomi Hibino, Tadashi Nishimatsu" },
+      { name: "The Smashing Machine", detail: "Kazu Hiro, Glen Griffin, Bjoern Rehbein" },
+      { name: "The Ugly Stepsister", detail: "Thomas Foldberg, Anne Cathrine Sauerberg" }
+    ]
+  },
+  {
+    id: "original-score", name: "Music (Original Score)", swapForExport: true,
+    nominees: [
+      { name: "Ludwig Goransson", detail: "Sinners" },
+      { name: "Jonny Greenwood", detail: "One Battle after Another" },
+      { name: "Max Richter", detail: "Hamnet" },
+      { name: "Alexandre Desplat", detail: "Frankenstein" },
+      { name: "Jerskin Fendrix", detail: "Bugonia" }
+    ]
+  },
+  {
+    id: "original-song", name: "Music (Original Song)",
+    nominees: [
+      { name: '"I Lied To You"', detail: "Sinners" },
+      { name: '"Train Dreams"', detail: "Train Dreams" },
+      { name: '"Golden"', detail: "KPop Demon Hunters" },
+      { name: '"Dear Me"', detail: "Diane Warren: Relentless" },
+      { name: '"Sweet Dreams Of Joy"', detail: "Viva Verdi!" }
+    ]
+  },
+  {
+    id: "sound", name: "Sound",
+    nominees: [
+      { name: "Sinners", detail: "Chris Welcker, Benjamin A. Burtt" },
+      { name: "One Battle after Another", detail: "Jos\u00e9 Antonio Garc\u00eda" },
+      { name: "F1", detail: "Gareth John, Al Nelson" },
+      { name: "Frankenstein", detail: "Greg Chapman, Nathan Robitaille" },
+      { name: "Sir\u0101t", detail: "Amanda Villavieja, Laia Casanovas" }
+    ]
+  },
+  {
+    id: "visual-effects", name: "Visual Effects",
+    nominees: [
+      { name: "Sinners", detail: "Michael Ralla, Espen Nordahl" },
+      { name: "Avatar: Fire and Ash", detail: "Joe Letteri, Richard Baneham" },
+      { name: "F1", detail: "Ryan Tudhope, Nicolas Chevallier" },
+      { name: "Jurassic World Rebirth", detail: "David Vickery, Stephen Aplin" },
+      { name: "The Lost Bus", detail: "Charlie Noble, David Zaretti" }
+    ]
+  },
+  {
+    id: "casting", name: "Casting", swapForExport: true,
+    nominees: [
+      { name: "Francine Maisler", detail: "Sinners" },
+      { name: "Cassandra Kulukundis", detail: "One Battle after Another" },
+      { name: "Jennifer Venditti", detail: "Marty Supreme" },
+      { name: "Nina Gold", detail: "Hamnet" },
+      { name: "Gabriel Domingues", detail: "The Secret Agent" }
+    ]
+  },
+  {
+    id: "live-action-short", name: "Live Action Short Film",
+    nominees: [
+      { name: "Butcher's Stain", detail: "Meyer Levinson-Blount" },
+      { name: "A Friend of Dorothy", detail: "Lee Knight" },
+      { name: "Jane Austen's Period Drama", detail: "Julia Aks" },
+      { name: "The Singers", detail: "Sam A. Davis" },
+      { name: "Two People Exchanging Saliva", detail: "Alexandre Singh" }
+    ]
+  },
+  {
+    id: "animated-short", name: "Animated Short Film",
+    nominees: [
+      { name: "Butterfly", detail: "Florence Miailhe" },
+      { name: "Forevergreen", detail: "Nathan Engelhardt" },
+      { name: "The Girl Who Cried Pearls", detail: "Chris Lavis" },
+      { name: "Retirement Plan", detail: "John Kelly" },
+      { name: "The Three Sisters", detail: "Konstantin Bronzit" }
+    ]
+  },
+  {
+    id: "documentary-short", name: "Documentary Short Film",
+    nominees: [
+      { name: "All the Empty Rooms", detail: "Joshua Seftel" },
+      { name: "Armed Only with a Camera", detail: "Craig Renaud" },
+      { name: 'Children No More: "Were and Are Gone"', detail: "Hilla Medalia" },
+      { name: "The Devil Is Busy", detail: "Christalyn Hampton" },
+      { name: "Perfectly a Strangeness", detail: "Alison McAlpine" }
+    ]
+  }
+];
+
+const VOTE_TYPES = {
+  want:    { label: "Want to Win",    icon: "\u2733", symbol: "\u2605", cssClass: "active-want",    exportClass: "want" },
+  ok:      { label: "Don't Mind",     icon: "\u25CB", symbol: "\u25CB", cssClass: "active-ok",      exportClass: "ok" },
+  predict: { label: "Think Will Win", icon: "\u25C6", symbol: "\u25C6", cssClass: "active-predict", exportClass: "predict" }
+};
+
+// ===== STATE =====
+let votes = {};
+
+function loadVotes() {
+  try {
+    const saved = localStorage.getItem('oscarBallot2026');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      for (const [k, v] of Object.entries(parsed)) {
+        votes[k] = new Set(v);
+      }
+    }
+  } catch(e) {}
+}
+
+function saveVotes() {
+  const serializable = {};
+  for (const [k, v] of Object.entries(votes)) {
+    if (v.size > 0) serializable[k] = [...v];
+  }
+  localStorage.setItem('oscarBallot2026', JSON.stringify(serializable));
+}
+
+function getNomineeId(catId, nomIdx) {
+  return catId + '-' + nomIdx;
+}
+
+// ===== RENDER VOTING UI =====
+function renderVotingUI() {
+  const main = document.getElementById('voting-area');
+  main.innerHTML = '';
+
+  CATEGORIES.forEach((cat) => {
+    const card = document.createElement('div');
+    card.className = 'category-card';
+    card.id = 'card-' + cat.id;
+
+    const voteCount = getVoteCountForCategory(cat);
+
+    card.innerHTML = `
+      <div class="category-header" onclick="toggleCategory('${cat.id}')">
+        <h2>${cat.name}</h2>
+        <span class="vote-badge ${voteCount === 0 ? 'empty' : ''}" id="badge-${cat.id}">${voteCount > 0 ? voteCount + ' voted' : 'none'}</span>
+        <span class="chevron">&#9662;</span>
+      </div>
+      <div class="category-body">
+        ${cat.nominees.map((nom, idx) => {
+          const nid = getNomineeId(cat.id, idx);
+          const v = votes[nid] || new Set();
+          return `
+            <div class="nominee-row">
+              <div class="nominee-info">
+                <span class="nominee-name">${nom.name}</span>
+                <span class="nominee-detail">${nom.detail}</span>
+              </div>
+              <div class="vote-buttons">
+                <button class="vote-btn ${v.has('want') ? 'active-want' : ''}" data-nid="${nid}" data-type="want" onclick="toggleVote('${nid}','want')" title="Want to Win">&#10084;&#65039;</button>
+                <button class="vote-btn ${v.has('ok') ? 'active-ok' : ''}" data-nid="${nid}" data-type="ok" onclick="toggleVote('${nid}','ok')" title="Don't Mind if Wins">&#128077;</button>
+                <button class="vote-btn ${v.has('predict') ? 'active-predict' : ''}" data-nid="${nid}" data-type="predict" onclick="toggleVote('${nid}','predict')" title="Think Will Win">&#127942;</button>
+              </div>
+            </div>`;
+        }).join('')}
+      </div>
+    `;
+    main.appendChild(card);
+  });
+  updateProgress();
+}
+
+function getVoteCountForCategory(cat) {
+  let count = 0;
+  cat.nominees.forEach((nom, idx) => {
+    const nid = getNomineeId(cat.id, idx);
+    if (votes[nid] && votes[nid].size > 0) count++;
+  });
+  return count;
+}
+
+function toggleCategory(catId) {
+  const card = document.getElementById('card-' + catId);
+  card.classList.toggle('collapsed');
+}
+
+function toggleVote(nid, type) {
+  if (!votes[nid]) votes[nid] = new Set();
+  const catId = nid.substring(0, nid.lastIndexOf('-'));
+  const cat = CATEGORIES.find(c => c.id === catId);
+
+  if (votes[nid].has(type)) {
+    // Toggling off
+    votes[nid].delete(type);
+    if (votes[nid].size === 0) delete votes[nid];
+  } else {
+    // "Want to Win" and "Don't Mind" are mutually exclusive on the same nominee
+    if (type === 'want') votes[nid].delete('ok');
+    if (type === 'ok') votes[nid].delete('want');
+
+    // "Want to Win" and "Think Will Win" are one-per-category — clear from other nominees
+    if (type === 'want' || type === 'predict') {
+      if (cat) {
+        cat.nominees.forEach((nom, idx) => {
+          const otherId = getNomineeId(cat.id, idx);
+          if (otherId !== nid && votes[otherId]) {
+            votes[otherId].delete(type);
+            if (votes[otherId].size === 0) delete votes[otherId];
+            updateNomineeButtons(otherId);
+          }
+        });
+      }
+    }
+
+    votes[nid].add(type);
+  }
+
+  saveVotes();
+  updateNomineeButtons(nid);
+  if (cat) updateCategoryBadge(cat);
+  updateProgress();
+}
+
+function updateNomineeButtons(nid) {
+  const v = votes[nid] || new Set();
+  const buttons = document.querySelectorAll(`[data-nid="${nid}"]`);
+  buttons.forEach(btn => {
+    const type = btn.dataset.type;
+    btn.className = 'vote-btn' + (v.has(type) ? ' active-' + type : '');
+  });
+}
+
+function updateCategoryBadge(cat) {
+  const count = getVoteCountForCategory(cat);
+  const badge = document.getElementById('badge-' + cat.id);
+  if (badge) {
+    badge.textContent = count > 0 ? count + ' voted' : 'none';
+    badge.className = 'vote-badge' + (count === 0 ? ' empty' : '');
+  }
+}
+
+function updateProgress() {
+  let count = 0;
+  CATEGORIES.forEach(cat => {
+    if (getVoteCountForCategory(cat) > 0) count++;
+  });
+  document.getElementById('progress-count').textContent = count;
+}
+
+function resetBallot() {
+  if (!confirm('Clear all votes?')) return;
+  votes = {};
+  saveVotes();
+  renderVotingUI();
+  showToast('Ballot cleared');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ===== EXPORT =====
+const EXPORT_PAGES = [
+  { title: "The Big Ones & Acting", sections: [
+    { title: "The Big Ones", ids: ["picture", "directing"] },
+    { title: "Acting", ids: ["lead-actor", "lead-actress", "supporting-actor", "supporting-actress"] }
+  ]},
+  { title: "Writing & Music", sections: [
+    { title: "Screenplay", ids: ["original-screenplay", "adapted-screenplay"] },
+    { title: "Music", ids: ["original-score", "original-song"] }
+  ]},
+  { title: "Craft & Technical", sections: [
+    { title: "Craft", ids: ["cinematography", "film-editing", "production-design", "costume-design", "makeup-hairstyling", "sound", "visual-effects", "casting"] }
+  ]},
+  { title: "Features & Shorts", sections: [
+    { title: "Features", ids: ["animated-feature", "international-feature", "documentary-feature"] },
+    { title: "Shorts", ids: ["live-action-short", "animated-short", "documentary-short"] }
+  ]}
+];
+
+const catMap = {};
+CATEGORIES.forEach(c => catMap[c.id] = c);
+
+function hasCatVotes(cat) {
+  return cat.nominees.some((nom, idx) => {
+    const nid = getNomineeId(cat.id, idx);
+    return votes[nid] && votes[nid].size > 0;
+  });
+}
+
+function buildCatCardHTML(cat) {
+  const votedNoms = [];
+  cat.nominees.forEach((nom, idx) => {
+    const nid = getNomineeId(cat.id, idx);
+    if (votes[nid] && votes[nid].size > 0) {
+      votedNoms.push({ ...nom, votes: votes[nid] });
+    }
+  });
+
+  const wantNom = votedNoms.find(n => n.votes.has('want'));
+  const predictNom = votedNoms.find(n => n.votes.has('predict'));
+  const okNoms = votedNoms.filter(n => n.votes.has('ok'));
+
+  const nomHTML = (nom, highlight) => {
+    const mainText = cat.swapForExport ? nom.detail : nom.name;
+    const subText = cat.swapForExport ? nom.name : nom.detail;
+    return `<div class="export-nom${highlight ? ' highlight' : ''}"><span class="export-nom-name">${mainText}</span><span class="export-nom-detail">${subText}</span></div>`;
+  };
+
+  let html = '';
+  html += `<div class="export-cat-name">${cat.name}</div>`;
+  html += `<div class="export-cat-line"></div>`;
+
+  if (wantNom) {
+    html += `<div class="export-vote-group">`;
+    html += `<div class="export-vote-label"><span class="export-vote-label-icon">\u2764\uFE0F</span> Want to Win</div>`;
+    html += nomHTML(wantNom, true);
+    html += `</div>`;
+  }
+
+  if (predictNom && predictNom !== wantNom) {
+    html += `<div class="export-vote-group">`;
+    html += `<div class="export-vote-label"><span class="export-vote-label-icon">\uD83C\uDFC6</span> Think Will Win</div>`;
+    html += nomHTML(predictNom, false);
+    html += `</div>`;
+  } else if (predictNom && predictNom === wantNom) {
+    html += `<div class="export-vote-label" style="margin-top:-6px;margin-bottom:10px;padding-left:28px"><span class="export-vote-label-icon">\uD83C\uDFC6</span> Also think will win</div>`;
+  }
+
+  const okOnly = okNoms.filter(n => n !== wantNom && n !== predictNom);
+  if (okOnly.length > 0) {
+    html += `<div class="export-vote-group">`;
+    html += `<div class="export-vote-label"><span class="export-vote-label-icon">\uD83D\uDC4D</span> Don't Mind</div>`;
+    okOnly.forEach(nom => { html += nomHTML(nom, false); });
+    html += `</div>`;
+  }
+
+  return html;
+}
+
+function buildExportPages() {
+  // Figure out which pages have any votes
+  const pages = [];
+  let totalPages = 0;
+
+  EXPORT_PAGES.forEach(page => {
+    const liveSections = [];
+    page.sections.forEach(section => {
+      const sectionCats = section.ids.map(id => catMap[id]).filter(c => c && hasCatVotes(c));
+      if (sectionCats.length > 0) liveSections.push({ title: section.title, cats: sectionCats });
+    });
+    if (liveSections.length > 0) {
+      pages.push({ title: page.title, sections: liveSections });
+      totalPages++;
+    }
+  });
+
+  if (totalPages === 0) return null;
+
+  return pages.map((page, i) => {
+    let html = `<div class="export-wrapper">`;
+
+    // Compact header with page number
+    html += `
+      <div class="export-hdr-mini">
+        <div class="export-hdr-mini-left">
+          <span class="export-hdr-mini-title">98th Academy Awards</span>
+          <span class="export-hdr-mini-sep">\u2726</span>
+          <span class="export-hdr-mini-subtitle">My Oscar Ballot</span>
+        </div>
+        <div class="export-hdr-mini-page">${i + 1}/${totalPages}</div>
+      </div>
+    `;
+
+    // Legend on first page only
+    if (i === 0) {
+      html += `
+        <div class="export-legend">
+          <div class="export-legend-item"><span class="export-legend-icon want">\u2764\uFE0F</span> Want to Win</div>
+          <div class="export-legend-item"><span class="export-legend-icon ok">\uD83D\uDC4D</span> Don't Mind</div>
+          <div class="export-legend-item"><span class="export-legend-icon predict">\uD83C\uDFC6</span> Think Will Win</div>
+        </div>
+      `;
+    }
+
+    // Sections
+    page.sections.forEach(section => {
+      html += `<div class="export-section">`;
+      html += `<div class="export-section-title">${section.title}</div>`;
+      html += `<div class="export-grid">`;
+      section.cats.forEach(cat => {
+        const isWide = section.cats.length === 1 || (cat.id === 'picture');
+        html += `<div class="export-cat${isWide ? ' wide' : ''}">`;
+        html += buildCatCardHTML(cat);
+        html += `</div>`;
+      });
+      html += `</div></div>`;
+    });
+
+    // Footer
+    html += `
+      <div class="export-footer">
+        <div class="export-divider"></div>
+        <p style="margin-top:10px">98th Academy Awards \u2022 March 2026</p>
+      </div>
+    `;
+
+    html += `</div>`;
+    return html;
+  });
+}
+
+async function exportBallot() {
+  const pages = buildExportPages();
+  if (!pages) {
+    showToast('Vote for at least one nominee first!');
+    return;
+  }
+
+  const loading = document.getElementById('loading');
+  loading.classList.add('show');
+
+  const container = document.getElementById('export-container');
+
+  await document.fonts.ready;
+
+  try {
+    for (let i = 0; i < pages.length; i++) {
+      container.innerHTML = pages[i];
+
+      // Let the DOM settle
+      await new Promise(r => setTimeout(r, 150));
+
+      const canvas = await html2canvas(container.querySelector('.export-wrapper'), {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#0a0a0f',
+        logging: false,
+        width: 1080,
+        windowWidth: 1080
+      });
+
+      const link = document.createElement('a');
+      link.download = `oscar-ballot-2026-${i + 1}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+
+      // Small delay between downloads so browser doesn't block them
+      if (i < pages.length - 1) await new Promise(r => setTimeout(r, 500));
+    }
+    showToast(`${pages.length} images exported!`);
+  } catch(err) {
+    console.error(err);
+    showToast('Export failed. Try again.');
+  } finally {
+    loading.classList.remove('show');
+    container.innerHTML = '';
+  }
+}
+
+// ===== INIT =====
+loadVotes();
+renderVotingUI();
+</script>
+</body>
+</html>
