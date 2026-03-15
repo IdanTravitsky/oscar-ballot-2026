@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>98th Academy Awards — My Oscar Ballot 2026</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+<meta property="og:title" content="My Oscar Ballot 2026">
+<meta property="og:description" content="Vote for your picks for the 98th Academy Awards and share your ballot as a beautiful image.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://idantravitsky.github.io/oscar-ballot-2026/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="My Oscar Ballot 2026">
+<meta name="twitter:description" content="Pick your winners for the 98th Academy Awards and export your ballot to share.">
+<meta name="description" content="Vote for your picks for the 98th Academy Awards and share your ballot as a beautiful image.">
+<meta name="theme-color" content="#d4af37">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -58,6 +68,16 @@ body {
   color: var(--text-muted);
 }
 .progress strong { color: var(--gold); }
+.instructions {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  opacity: 0.8;
+}
 
 /* LEGEND BAR */
 .legend-bar {
@@ -578,6 +598,7 @@ main {
   <h1>98th Academy Awards</h1>
   <div class="subtitle">My Oscar Ballot &mdash; March 2026</div>
   <div class="progress">Voted in <strong id="progress-count">0</strong> of <strong>24</strong> categories</div>
+  <p class="instructions" id="instructions">Tap the icons next to each nominee to vote. One <span style="color:var(--gold)">&#10084;&#65039;</span> and one <span style="color:var(--copper)">&#127942;</span> per category, unlimited <span style="color:var(--silver)">&#128077;</span>. Then export your ballot as shareable images!</p>
 </header>
 
 <div class="legend-bar">
